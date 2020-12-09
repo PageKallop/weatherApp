@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    
+    var weatherManager = WeatherManager()
 
    
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -36,9 +38,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    // empty textfield
+    // inputs city name then will empty textfield
     func textFieldDidEndEditing(_ textField: UITextField) {
         
+        if let city = searchTextField.text {
+            weatherManager.getWeather(cityName: city)
+        }
+       
         searchTextField.text = ""
     }
     
