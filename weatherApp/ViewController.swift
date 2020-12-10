@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
-    var weatherManager = WeatherManager()
 
    
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -20,22 +19,39 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var searchTextField: UITextField!
     
+    var weatherManager = WeatherManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         searchTextField.delegate = self
     }
 
     
     @IBAction func searchPressed(_ sender: UIButton) {
-        
+//        print(searchTextField.text!)
         searchTextField.endEditing(true)
+        
     }
     
     // returns textfield input
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        print(searchTextField.text!)
         searchTextField.endEditing(true)
+        
         return true
+    }
+    
+    // validates user input
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        
+        if searchTextField.text != "" {
+            return true
+        } else {
+            searchTextField.placeholder = "Type a city"
+            return false
+        }
     }
     
     // inputs city name then will empty textfield
@@ -46,17 +62,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
        
         searchTextField.text = ""
-    }
-    
-    // validates user input 
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        
-        if searchTextField.text != "" {
-            return true
-        } else {
-            searchTextField.placeholder = "Type a city"
-            return false
-        }
     }
     
 
