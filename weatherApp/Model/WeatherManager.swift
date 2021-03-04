@@ -15,7 +15,7 @@ protocol WeatherManagerDelegate {
 
 struct WeatherManager {
     
-    let weatherURL = "https://api.openweathermap.org/data/2.5/weather?&appid=5cb2759fe6b024079dbfa1895985b0c9&units=imperial"
+    let weatherURL = "https://api.openweathermap.org/data/2.5/weather?&appid=&units=imperial"
     
     var delegate: WeatherManagerDelegate?
     
@@ -68,10 +68,9 @@ struct WeatherManager {
             let name = decodedData.name
             
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
-            
-            return weather
-            
             print(weather.conditionName)
+            return weather
+          
         } catch {
             delegate?.didFailWithError(error: error) 
             return nil
