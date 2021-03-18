@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         locationManager.delegate = self
         weatherManager.delegate = self
         searchTextField.delegate = self
+    
     }
     
     
@@ -76,9 +77,14 @@ extension ViewController: UITextFieldDelegate {
     // inputs city name then will empty textfield
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if let city = searchTextField.text {
-            weatherManager.getWeather(cityName: city)
-        }
+        let cityName = searchTextField.text
+        
+        //removes spaces
+        let city = cityName!.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "%20")
+        
+      
+        weatherManager.getWeather(cityName: city)
+        
        
         searchTextField.text = ""
     }
